@@ -1,7 +1,7 @@
 # sams-racing-game
 <a href="https://github.com/sf-wdi-31/oop-game-training">Original Github Repository</a>
 
-The more open ended and abstract projects like this are always more difficult for me. I feel like this is very incomplete because it's often hard for me to envision every step I will need to take when designing code. I'm sure there are twice as many methods and thrice as many properties that i would actually end up using while writing this game. I'm really excited that I just got to use the word thrice. There's no word for four times. I think it would be fun to use handlebars and SVG code for all the objects on screen. 
+   The more open ended and abstract projects like this are always more difficult for me. I feel like this is very incomplete because it's often hard for me to envision every step I will need to take when designing code. I'm sure there are twice as many methods and thrice as many properties that i would actually end up using while writing this game. I'm really excited that I just got to use the word thrice. There's no word for four times. I think it would be fun to use handlebars and SVG code for all the objects on screen. 
 
 ## User Stories
 
