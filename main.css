@@ -1,0 +1,6 @@
+#gameboard {
+	height: 300px;
+	width: 300px;
+	z-index: -20;
+	background-color: #999999;
+}
