@@ -25,7 +25,7 @@ var svgholder = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 var Bubble = function(radius){
 	this.xpos = randomx();
 	this.ypos = randomy();
-	this.radius = randomr;
+	this.radius = radius;
 	this.color = randomColor();
 	this.place = function(){
 		var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");;
@@ -37,5 +37,8 @@ var Bubble = function(radius){
 	}
 }
 
-var bubble1 = new Bubble(10);
-bubble1.place();
+var bubbleList = new Array;
+for (var i = 0; i < 10; i++){
+	bubbleList[i] = new Bubble(i * 2 + 10);
+	bubbleList[i].place();
+}
