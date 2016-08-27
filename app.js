@@ -1,9 +1,11 @@
 
 
 
-
 $( document ).ready(function() {
     gameStart();
+    $('#hello-button').on('click', function(){
+    	gameStart();
+    })
 })
 
 
@@ -11,11 +13,14 @@ $( document ).ready(function() {
 
 function countCircles(){
 	if(gameboard.childNodes.length === 0){
-		console.log('good job you killed all the bubbles!');
-		gameStart();
+		endTime = Date.now();
+		totalGameTime = endTime - startTime;
+		console.log(totalGameTime);
+		$('#current-score').text(totalGameTime);
 	}
 }
-
+var startTime;
+var endTime;
 var defaultRed = 40;
 var defaultGreen = 175;
 var defaultBlue = 160;
@@ -79,7 +84,11 @@ function setCircleClicksteners() {
 }
 
 function gameStart(){
+	$('#gameboard').text('');
+	startTime = Date.now();
 	makeBubbles(10);
+	//Clicksteners = Click Listeners.
 	setCircleClicksteners();
+
 }
 
