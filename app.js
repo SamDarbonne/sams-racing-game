@@ -11,11 +11,15 @@ $( document ).ready(function() {
 
 function countCircles(){
 	if(gameboard.childNodes.length === 0){
-		console.log('good job you killed all the bubbles!')
+		console.log('good job you killed all the bubbles!');
+		gameStart();
 	}
 }
 
-
+var defaultRed = 40;
+var defaultGreen = 175;
+var defaultBlue = 160;
+var defaultColorVariety = 80;
 var gameboard = document.getElementById('gameboard');
 
 function randomx(){
@@ -31,10 +35,10 @@ function randomColorValue(variety, offset){
 }
 
 //chose a semi-random color value for each color component, then concatenate them into an rgb color code
-function randomColor(){
-	red = randomColorValue(45, 45);
-	green = randomColorValue(40, 75);
-	blue = randomColorValue(20, 160);
+function randomColor(variety, redBase, greenBase, blueBase){
+	red = randomColorValue(variety, redBase);
+	green = randomColorValue(variety, greenBase);
+	blue = randomColorValue(variety, blueBase);
 	return('rgb(' + red + ', ' + green + ', ' + blue + ')');
 }
 
@@ -43,7 +47,7 @@ var Bubble = function(radius){
 	this.xpos = randomx();
 	this.ypos = randomy();
 	this.radius = radius;
-	this.color = randomColor();
+	this.color = randomColor(defaultColorVariety, defaultRed, defaultGreen, defaultBlue);
 	this.place = function(){
 		var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 		circle.setAttribute('cy', this.ypos);
@@ -61,7 +65,6 @@ function makeBubbles(num){
 		bubbleList[i] = new Bubble(i * 2 + 10);
 		bubbleList[i].place();
 	}
-	console.log(bubbleList)
 }
 
 //remove circle when clicked, then check to see if it was the last circle
