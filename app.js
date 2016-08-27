@@ -3,7 +3,7 @@
 
 $( document ).ready(function() {
     gameStart();
-    $('#hello-button').on('click', function(){
+    $('#restart-button').on('click', function(){
     	gameStart();
     })
 })
