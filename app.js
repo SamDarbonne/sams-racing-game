@@ -41,6 +41,22 @@ var defaultBlue = 50;
 var defaultColorVariety = 40;
 var gameboard = document.getElementById('gameboard');
 
+function setColorListener(buttonNumber, red, green, blue, variety){
+	document.getElementById('color' + buttonNumber).addEventListener('click', function(){
+		defaultRed = red;
+		defaultGreen = green;
+		defaultBlue = blue;
+		defaultColorVariety = variety;
+		clearInterval(intervalId);
+		gameStart();
+	})
+}
+setColorListener(1, 200, 50, 50, 55);
+setColorListener(2, 50, 200, 50, 55);
+setColorListener(3, 50, 50, 200, 55);
+setColorListener(4, 50, 50, 50, 55);
+setColorListener(5, 50, 50, 50, 205);
+
 
 Handlebars.registerHelper("inc", function(value, options){
     return parseInt(value) + 1;
