@@ -17,6 +17,10 @@ function countCircles(){
 		totalGameTime = endTime - startTime;
 		console.log(totalGameTime);
 		$('#current-score').text(totalGameTime);
+		if (totalGameTime < highScore){
+			highScore = totalGameTime;
+		}
+		$('#high-score').text(highScore.toString());
 	}
 }
 var highScore = 12000;
@@ -87,10 +91,10 @@ function setCircleClicksteners() {
 
 function gameStart(){
 	console.log(highScore);
-	if (totalGameTime < highScore){
-		highScore = totalGameTime;
-	}
-	$('#high-score').text(highScore.toString());
+	// if (totalGameTime < highScore){
+	// 	highScore = totalGameTime;
+	// }
+	// $('#high-score').text(highScore.toString());
 	$('#gameboard').text('');
 	startTime = Date.now();
 	makeBubbles(10);
