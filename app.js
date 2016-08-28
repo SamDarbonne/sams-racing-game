@@ -4,6 +4,7 @@
 $( document ).ready(function() {
     gameStart();
     $('#restart-button').on('click', function(){
+    	clearInterval(intervalId);
     	gameStart();
     })
 })
@@ -30,10 +31,10 @@ var highScore = 12000;
 var totalGameTime;
 var startTime;
 var endTime;
-var defaultRed = 20;
-var defaultGreen = 150;
-var defaultBlue = 130;
-var defaultColorVariety = 30;
+var defaultRed = 0;
+var defaultGreen = 0;
+var defaultBlue = 0;
+var defaultColorVariety = 200;
 var gameboard = document.getElementById('gameboard');
 
 function randomx(){
@@ -91,16 +92,18 @@ function setCircleClicksteners() {
 		})
 	}
 }
-
+function timing(){
+	thisTime = Date.now();
+	displayTime = thisTime - startTime;
+	$('#current-score').text(displayTime);
+}
 function gameStart(){
 	console.log(highScore);
 	$('#gameboard').text('');
 	startTime = Date.now();
 	intervalId = setInterval(function(){
-		thisTime = Date.now();
-		displayTime = thisTime - startTime;
-		$('#current-score').text(displayTime.toString());
-	}, 11);
+		timing();
+	});
 	makeBubbles(10);
 	//Clicksteners = Click Listeners.
 	setCircleClicksteners();
