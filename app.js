@@ -8,9 +8,15 @@ $( document ).ready(function() {
     	gameStart();
     })
 })
-
-
-
+var source   = $("#entry-template").html();
+var template = Handlebars.compile(source);
+function highScoreTemplate() {
+	// var source   = $("#entry-template").html();
+	// var template = Handlebars.compile(source);
+	var context = {highScore: highScore};
+	var html    = template(context);
+	document.getElementById('high-score').innerHTML = html;
+}
 
 function countCircles(){
 	if(gameboard.childNodes.length === 0){
@@ -18,16 +24,17 @@ function countCircles(){
 		endTime = Date.now();
 		totalGameTime = endTime - startTime;
 		console.log(totalGameTime);
-		$('#current-score').text(totalGameTime);
-		if (totalGameTime < highScore){
-			highScore = totalGameTime;
+		document.getElementById('current-score').innerHTML = totalGameTime;
+		if (totalGameTime < highScore[4]){
+			highScore[4] = totalGameTime;
+			highScore.sort(sortNumber);
+			highScoreTemplate();
 		}
-		$('#high-score').text(highScore.toString());
 	}
 }
 
 var intervalId;
-var highScore = 12000;
+var highScore = [12000, 12000, 12000, 12000, 12000];
 var totalGameTime;
 var startTime;
 var endTime;
@@ -36,6 +43,16 @@ var defaultGreen = 0;
 var defaultBlue = 0;
 var defaultColorVariety = 200;
 var gameboard = document.getElementById('gameboard');
+
+
+Handlebars.registerHelper("inc", function(value, options){
+    return parseInt(value) + 1;
+});
+
+
+function sortNumber(a,b) {
+    return a - b;
+}
 
 function randomx(){
 	return (Math.round(Math.random() * 460) + 30);
@@ -94,16 +111,16 @@ function setCircleClicksteners() {
 function timing(){
 	thisTime = Date.now();
 	displayTime = thisTime - startTime;
-	$('#current-score').text(displayTime);
+	document.getElementById('current-score').innerHTML = displayTime;
 }
 function gameStart(){
-	console.log(highScore);
-	$('#gameboard').text('');
+	highScoreTemplate();
+	gameboard.innerHTML = '';
 	startTime = Date.now();
 	intervalId = setInterval(function(){
 		timing();
 	});
-	makeBubbles(10);
+	makeBubbles(2);
 	//Clicksteners = Click Listeners.
 	setCircleClicksteners();
 

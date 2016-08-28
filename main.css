@@ -4,3 +4,7 @@
 	z-index: -20;
 	background-color: #999999;
 }
+
+.inline {
+	display:inline;
+}

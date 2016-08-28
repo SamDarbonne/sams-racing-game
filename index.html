@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="skeleton.css">
     <link type="text/css" rel="stylesheet" href="normalize.css">
 	<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
-
+	<script src="handlebars-v4.0.5.js"></script>
 </head>
 <body>
 	<div class="row">
@@ -18,8 +18,19 @@
 		</div>
 		<div class="six columns">
 			<button id="restart-button">Start Over</button>
-			<div id="current-score"></div>
-			<div id="high-score">10000</div>
+			<div>
+				<div class="inline">Current Score: </div>
+				<div class="inline" id="current-score"></div>
+			</div>
+			<div id="high-score">
+				<script id="entry-template" type="text/x-handlebars-template">
+  					{{#each highScore}}
+  					<li class="entry">
+						{{inc @index}}: {{this}}
+  					</li>
+  					{{/each}}
+				</script>
+			</div>
 		</div>
 	</div>
 
