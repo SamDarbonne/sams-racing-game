@@ -1,14 +1,11 @@
 
 
 
-$( document ).ready(function() {
-    gameStart();
-    $('#restart-button').on('click', function(){
-    	clearInterval(intervalId);
-    	gameStart();
-    })
-})
-var source   = $("#entry-template").html();
+
+   
+
+
+var source   = document.getElementById('entry-template').innerHTML;
 var template = Handlebars.compile(source);
 function highScoreTemplate() {
 	// var source   = $("#entry-template").html();
@@ -23,8 +20,8 @@ function countCircles(){
 		clearInterval(intervalId);
 		endTime = Date.now();
 		totalGameTime = endTime - startTime;
-		console.log(totalGameTime);
 		document.getElementById('current-score').innerHTML = totalGameTime;
+		//if this score is better than the last high score, replace that one then resort high score list
 		if (totalGameTime < highScore[4]){
 			highScore[4] = totalGameTime;
 			highScore.sort(sortNumber);
@@ -34,7 +31,7 @@ function countCircles(){
 }
 
 var intervalId;
-var highScore = [12000, 12000, 12000, 12000, 12000];
+var highScore = [10000, 11000, 12000, 13000, 14000];
 var totalGameTime;
 var startTime;
 var endTime;
@@ -120,9 +117,15 @@ function gameStart(){
 	intervalId = setInterval(function(){
 		timing();
 	});
-	makeBubbles(9);
+	makeBubbles(0);
 	//Clicksteners = Click Listeners.
 	setCircleClicksteners();
 
 }
+
+ gameStart();
+ document.getElementById('restart-button').addEventListener('click', function(){
+    clearInterval(intervalId);
+    gameStart();
+})
 
