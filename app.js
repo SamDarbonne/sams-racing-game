@@ -38,10 +38,10 @@ var highScore = [12000, 12000, 12000, 12000, 12000];
 var totalGameTime;
 var startTime;
 var endTime;
-var defaultRed = 0;
-var defaultGreen = 0;
-var defaultBlue = 0;
-var defaultColorVariety = 200;
+var defaultRed = 50;
+var defaultGreen = 200;
+var defaultBlue = 50;
+var defaultColorVariety = 40;
 var gameboard = document.getElementById('gameboard');
 
 
@@ -120,7 +120,7 @@ function gameStart(){
 	intervalId = setInterval(function(){
 		timing();
 	});
-	makeBubbles(2);
+	makeBubbles(9);
 	//Clicksteners = Click Listeners.
 	setCircleClicksteners();
 

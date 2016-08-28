@@ -8,3 +8,9 @@
 .inline {
 	display:inline;
 }
+
+.entry {
+	background-color: #4ddbff;
+	display: block;
+	border-radius: 5px;
+}

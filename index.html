@@ -18,18 +18,20 @@
 		</div>
 		<div class="six columns">
 			<button id="restart-button">Start Over</button>
-			<div>
+			<div class="current-score">
 				<div class="inline">Current Score: </div>
 				<div class="inline" id="current-score"></div>
 			</div>
-			<div id="high-score">
-				<script id="entry-template" type="text/x-handlebars-template">
-  					{{#each highScore}}
-  					<li class="entry">
-						{{inc @index}}: {{this}}
-  					</li>
-  					{{/each}}
-				</script>
+			<div class="six columns">
+				<div id="high-score">
+					<script id="entry-template" type="text/x-handlebars-template">
+  						{{#each highScore}}
+  						<li class="entry">
+							{{inc @index}}: {{this}}
+  						</li>
+  						{{/each}}
+					</script>
+				</div>
 			</div>
 		</div>
 	</div>
