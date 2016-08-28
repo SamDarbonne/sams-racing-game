@@ -19,7 +19,7 @@ function countCircles(){
 	if(gameboard.childNodes.length === 0){
 		clearInterval(intervalId);
 		endTime = Date.now();
-		totalGameTime = endTime - startTime;
+		totalGameTime = Math.round((endTime - startTime)/10)/100;
 		document.getElementById('current-score').innerHTML = totalGameTime;
 		//if this score is better than the last high score, replace that one then resort high score list
 		if (totalGameTime < highScore[4]){
@@ -31,7 +31,7 @@ function countCircles(){
 }
 
 var intervalId;
-var highScore = [10000, 11000, 12000, 13000, 14000];
+var highScore = [10, 11, 12, 13, 14];
 var totalGameTime;
 var startTime;
 var endTime;
@@ -107,7 +107,7 @@ function setCircleClicksteners() {
 }
 function timing(){
 	thisTime = Date.now();
-	displayTime = thisTime - startTime;
+	displayTime = Math.round((thisTime - startTime)/10)/100;
 	document.getElementById('current-score').innerHTML = displayTime;
 }
 function gameStart(){
@@ -117,7 +117,7 @@ function gameStart(){
 	intervalId = setInterval(function(){
 		timing();
 	});
-	makeBubbles(0);
+	makeBubbles(9);
 	//Clicksteners = Click Listeners.
 	setCircleClicksteners();
 
