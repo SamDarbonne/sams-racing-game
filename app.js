@@ -19,12 +19,14 @@ function countCircles(){
 		$('#current-score').text(totalGameTime);
 	}
 }
+var highScore = 12000;
+var totalGameTime;
 var startTime;
 var endTime;
-var defaultRed = 40;
-var defaultGreen = 175;
-var defaultBlue = 160;
-var defaultColorVariety = 80;
+var defaultRed = 20;
+var defaultGreen = 150;
+var defaultBlue = 130;
+var defaultColorVariety = 30;
 var gameboard = document.getElementById('gameboard');
 
 function randomx(){
@@ -84,6 +86,11 @@ function setCircleClicksteners() {
 }
 
 function gameStart(){
+	console.log(highScore);
+	if (totalGameTime < highScore){
+		highScore = totalGameTime;
+	}
+	$('#high-score').text(highScore.toString());
 	$('#gameboard').text('');
 	startTime = Date.now();
 	makeBubbles(10);
