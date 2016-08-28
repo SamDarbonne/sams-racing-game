@@ -57,7 +57,6 @@ function randomColor(variety, redBase, greenBase, blueBase){
 	return('rgb(' + red + ', ' + green + ', ' + blue + ')');
 }
 
-var svgholder = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 var Bubble = function(radius){
 	this.xpos = randomx();
 	this.ypos = randomy();
