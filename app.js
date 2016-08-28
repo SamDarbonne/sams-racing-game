@@ -13,6 +13,7 @@ $( document ).ready(function() {
 
 function countCircles(){
 	if(gameboard.childNodes.length === 0){
+		clearInterval(intervalId);
 		endTime = Date.now();
 		totalGameTime = endTime - startTime;
 		console.log(totalGameTime);
@@ -23,6 +24,8 @@ function countCircles(){
 		$('#high-score').text(highScore.toString());
 	}
 }
+
+var intervalId;
 var highScore = 12000;
 var totalGameTime;
 var startTime;
@@ -91,12 +94,13 @@ function setCircleClicksteners() {
 
 function gameStart(){
 	console.log(highScore);
-	// if (totalGameTime < highScore){
-	// 	highScore = totalGameTime;
-	// }
-	// $('#high-score').text(highScore.toString());
 	$('#gameboard').text('');
 	startTime = Date.now();
+	intervalId = setInterval(function(){
+		thisTime = Date.now();
+		displayTime = thisTime - startTime;
+		$('#current-score').text(displayTime.toString());
+	}, 11);
 	makeBubbles(10);
 	//Clicksteners = Click Listeners.
 	setCircleClicksteners();
