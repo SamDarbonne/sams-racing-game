@@ -5,11 +5,10 @@ var template = Handlebars.compile(source);
 //dummy high score values to start with
 var highScore        = [10, 11, 12, 13, 14];
 var highScore2       = [11, 12, 13, 14, 15];
-var highScore3       = [12, 13, 14, 15, 16];
-var highScore4       = [13, 14, 16, 18, 20];
-var highScore5       = [14, 15, 17, 19, 23];
-var highScore6       = [20, 25, 30, 35, 40];
-var highScoreBoardList = [highScore, highScore2, highScore3, highScore4, highScore5, highScore6];
+var highScore3       = [12, 13, 14, 15, 20];
+var highScore4       = [13, 15, 20, 25, 30];
+var highScore5       = [20, 25, 30, 35, 40];
+var highScoreBoardList = [highScore, highScore2, highScore3, highScore4, highScore5];
 
 //variables that need to be global scope
 var totalGameTime;
