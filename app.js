@@ -1,8 +1,15 @@
+//compile handlebars template for high score board
 var source   = document.getElementById('entry-template').innerHTML;
 var template = Handlebars.compile(source);
 
 //dummy high score values to start with
-var highScore = [10, 11, 12, 13, 14];
+var highScore        = [10, 11, 12, 13, 14];
+var highScore2       = [11, 12, 13, 14, 15];
+var highScore3       = [12, 13, 14, 15, 16];
+var highScore4       = [13, 14, 15, 16, 17];
+var highScore5       = [14, 15, 16, 17, 18];
+var highScore6       = [15, 16, 17, 18, 19];
+var highScoreBoardList = [highScore, highScore2, highScore3, highScore4, highScore5, highScore6];
 
 //variables that need to be global scope
 var totalGameTime;
@@ -11,17 +18,21 @@ var endTime;
 var intervalId;
 
 //color values to be used by bubble constructor
-var defaultRed = 50;
-var defaultGreen = 200;
+var defaultRed = 200;
+var defaultGreen = 50;
 var defaultBlue = 50;
-var defaultColorVariance = 40;
+var defaultColorVariance = 50;
+
+//difficulty settings
+currentHighScoreList = [highScore, highScore2];
+defaultBubbleCount = 9;
+difficulty = 2;
 
 //grab gameboard for later use
 var gameboard = document.getElementById('gameboard');
 
+//handlebars script for high score board
 function highScoreTemplate() {
-	// var source   = $("#entry-template").html();
-	// var template = Handlebars.compile(source);
 	var context = {highScore: highScore};
 	var html    = template(context);
 	document.getElementById('high-score').innerHTML = html;
@@ -45,24 +56,26 @@ function countCircles(){
 
 
 //sets a click listener on designated color button to change default color values used in bubble constructor
-function setColorListener(buttonNumber, red, green, blue, variance){
+function setColorListener(buttonNumber, red, green, blue, variance, difficulty, bubbleCount, scoreCategory){
 	document.getElementById('color' + buttonNumber).addEventListener('click', function(){
 		defaultRed = red;
 		defaultGreen = green;
 		defaultBlue = blue;
 		defaultColorVariance = variance;
 		clearInterval(intervalId);
+		difficulty = difficulty;
+		defaultBubbleCount = bubbleCount;
+		highScore = highScoreBoardList[scoreCategory]
 		gameStart();
-
 	})
 }
 
 //sets color button click listeners
-setColorListener(1, 200, 50, 50, 55);
-setColorListener(2, 50, 200, 50, 55);
-setColorListener(3, 50, 50, 200, 55);
-setColorListener(4, 50, 50, 50, 55);
-setColorListener(5, 50, 50, 50, 205);
+setColorListener(1, 200, 50, 50, 55, 2, 9, 0);
+setColorListener(2, 50, 200, 50, 55, 0, 14, 1);
+setColorListener(3, 50, 50, 200, 55, 2, 19, 2);
+setColorListener(4, 50, 50, 50, 55, 2, 24, 3);
+setColorListener(5, 50, 50, 50, 205, 2, 29, 4);
 
 //handlebars helper so high score list is indexed at 1 isntead of 0
 Handlebars.registerHelper("inc", function(value, options){
@@ -96,6 +109,8 @@ function randomColor(variance, redBase, greenBase, blueBase){
 	return('rgb(' + red + ', ' + green + ', ' + blue + ')');
 }
 
+//
+//
 //bubble constructor
 var Bubble = function(radius){
 	this.xpos = randomx();
@@ -117,7 +132,7 @@ function makeBubbles(num){
 	var bubbleList = new Array;
 	for (var i = 0; i < (num + 1); i++){
 		//increase the bubble's radius by 2 pixels for each new bubble
-		bubbleList[i] = new Bubble(i * 2 + 10);
+		bubbleList[i] = new Bubble((i * difficulty) + 10);
 		bubbleList[i].place();
 	}
 }
@@ -132,11 +147,15 @@ function setCircleClicksteners() {
 		})
 	}
 }
+
+//updates current time continuosly in setInterval
 function timing(){
 	thisTime = Date.now();
 	displayTime = Math.round((thisTime - startTime)/10)/100;
 	document.getElementById('current-score').innerHTML = displayTime;
 }
+
+//start or restart game, stop previous setinterval, set new start time, make bubbles, set bubble listeners
 function gameStart(){
 	highScoreTemplate();
 	gameboard.innerHTML = '';
@@ -144,7 +163,7 @@ function gameStart(){
 	intervalId = setInterval(function(){
 		timing();
 	});
-	makeBubbles(9);
+	makeBubbles(defaultBubbleCount);
 	//Clicksteners = Click Listeners.
 	setCircleClicksteners();
 

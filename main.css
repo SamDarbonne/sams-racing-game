@@ -17,12 +17,12 @@
 }
 
 #color1 {
-	background-color: rgb(220, 70, 70);
-	color: rgb(130, 20, 20);
-}
-#color2 {
 	background-color: rgb(70, 220, 70);
 	color: rgb(0, 130, 0);
+}
+#color2 {
+	background-color: rgb(220, 70, 70);
+	color: rgb(130, 20, 20);
 }
 #color3 {
 	background-color: rgb(70, 70, 220);
@@ -40,5 +40,5 @@
 	border: none;
 	margin: 5px;
 	font-weight: 900;
-
+	display: block;
 }
