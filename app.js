@@ -8,7 +8,7 @@ var highScore2       = [11, 12, 13, 14, 15];
 var highScore3       = [12, 13, 14, 15, 16];
 var highScore4       = [13, 14, 16, 18, 20];
 var highScore5       = [14, 15, 17, 19, 23];
-var highScore6       = [15, 18, 20, 23, 25];
+var highScore6       = [20, 25, 30, 35, 40];
 var highScoreBoardList = [highScore, highScore2, highScore3, highScore4, highScore5, highScore6];
 
 //variables that need to be global scope
@@ -24,13 +24,14 @@ var defaultBlue = 50;
 var defaultColorVariance = 50;
 
 //difficulty settings
-currentHighScoreList = [highScore, highScore2];
 defaultBubbleCount = 9;
 difficulty = 4;
-bubbleSize = 15;
+bubbleSize = 20;
 
-//grab gameboard for later use
+//grab any DOM element that needs to be grabbed more than once
 var gameboard = document.getElementById('gameboard');
+var currentScore = document.getElementById('current-score');
+
 
 //handlebars script for high score board
 function highScoreTemplate() {
@@ -45,7 +46,7 @@ function countCircles(){
 		clearInterval(intervalId);
 		endTime = Date.now();
 		totalGameTime = Math.round((endTime - startTime)/10)/100;
-		document.getElementById('current-score').innerHTML = totalGameTime;
+		currentScore.innerHTML = totalGameTime;
 		//if this score is better than the last high score, replace that one then resort high score list
 		if (totalGameTime < highScore[4]){
 			highScore[4] = totalGameTime;
@@ -73,7 +74,7 @@ function setColorListener(buttonNumber, red, green, blue, variance, difficultySe
 }
 
 //sets color button click listeners
-setColorListener(1, 50, 200, 50, 55, 4, 9, 0, 15);
+setColorListener(1, 50, 200, 50, 55, 4, 9, 0, 20);
 setColorListener(2, 200, 50, 50, 55, 1.5, 14, 1, 15);
 setColorListener(3, 50, 50, 200, 55, 1.3, 19, 2, 10);
 setColorListener(4, 50, 50, 50, 55, 1.1, 24, 3, 10);
@@ -134,7 +135,7 @@ function makeBubbles(num){
 	var bubbleList = new Array;
 	for (var i = 0; i < (num + 1); i++){
 		//increase the bubble's radius by 2 pixels for each new bubble
-		bubbleList[i] = new Bubble((i * difficulty) + 10);
+		bubbleList[i] = new Bubble((i * difficulty) + bubbleSize);
 		bubbleList[i].place();
 	}
 }
@@ -154,7 +155,7 @@ function setCircleClicksteners() {
 function timing(){
 	thisTime = Date.now();
 	displayTime = Math.round((thisTime - startTime)/10)/100;
-	document.getElementById('current-score').innerHTML = displayTime;
+	currentScore.innerHTML = displayTime;
 }
 
 //start or restart game, stop previous setinterval, set new start time, make bubbles, set bubble listeners
