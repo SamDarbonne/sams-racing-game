@@ -6,9 +6,9 @@ var template = Handlebars.compile(source);
 var highScore        = [10, 11, 12, 13, 14];
 var highScore2       = [11, 12, 13, 14, 15];
 var highScore3       = [12, 13, 14, 15, 16];
-var highScore4       = [13, 14, 15, 16, 17];
-var highScore5       = [14, 15, 16, 17, 18];
-var highScore6       = [15, 16, 17, 18, 19];
+var highScore4       = [13, 14, 16, 18, 20];
+var highScore5       = [14, 15, 17, 19, 23];
+var highScore6       = [15, 18, 20, 23, 25];
 var highScoreBoardList = [highScore, highScore2, highScore3, highScore4, highScore5, highScore6];
 
 //variables that need to be global scope
@@ -18,15 +18,16 @@ var endTime;
 var intervalId;
 
 //color values to be used by bubble constructor
-var defaultRed = 200;
-var defaultGreen = 50;
+var defaultRed = 50;
+var defaultGreen = 200;
 var defaultBlue = 50;
 var defaultColorVariance = 50;
 
 //difficulty settings
 currentHighScoreList = [highScore, highScore2];
 defaultBubbleCount = 9;
-difficulty = 2;
+difficulty = 4;
+bubbleSize = 15;
 
 //grab gameboard for later use
 var gameboard = document.getElementById('gameboard');
@@ -56,26 +57,27 @@ function countCircles(){
 
 
 //sets a click listener on designated color button to change default color values used in bubble constructor
-function setColorListener(buttonNumber, red, green, blue, variance, difficulty, bubbleCount, scoreCategory){
+function setColorListener(buttonNumber, red, green, blue, variance, difficultySet, bubbleCount, scoreCategory, initialBubbleSize){
 	document.getElementById('color' + buttonNumber).addEventListener('click', function(){
 		defaultRed = red;
 		defaultGreen = green;
 		defaultBlue = blue;
 		defaultColorVariance = variance;
 		clearInterval(intervalId);
-		difficulty = difficulty;
+		difficulty = difficultySet;
 		defaultBubbleCount = bubbleCount;
+		bubbleSize = initialBubbleSize;
 		highScore = highScoreBoardList[scoreCategory]
 		gameStart();
 	})
 }
 
 //sets color button click listeners
-setColorListener(1, 200, 50, 50, 55, 2, 9, 0);
-setColorListener(2, 50, 200, 50, 55, 0, 14, 1);
-setColorListener(3, 50, 50, 200, 55, 2, 19, 2);
-setColorListener(4, 50, 50, 50, 55, 2, 24, 3);
-setColorListener(5, 50, 50, 50, 205, 2, 29, 4);
+setColorListener(1, 50, 200, 50, 55, 4, 9, 0, 15);
+setColorListener(2, 200, 50, 50, 55, 1.5, 14, 1, 15);
+setColorListener(3, 50, 50, 200, 55, 1.3, 19, 2, 10);
+setColorListener(4, 50, 50, 50, 55, 1.1, 24, 3, 10);
+setColorListener(5, 50, 50, 50, 205, 0.5, 29, 4, 3);
 
 //handlebars helper so high score list is indexed at 1 isntead of 0
 Handlebars.registerHelper("inc", function(value, options){
